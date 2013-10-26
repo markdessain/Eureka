@@ -21,16 +21,10 @@ var playing = document.getElementById("playing");
 var score = 0;
 var question = 1;
 var answer = "";
+var guess = "";
 var maxquestions = 20;
 var timer = 10;
 var timeout = null;
-/*
-$.getJSON("letters/aDict.json", function(data){
-	aDict = data;
-	lastword = data[Math.floor(Math.random() * data.length)];
-	nextquestion();
-});
-*/
 
 function playAgain() {
 	lastword = aDict[Math.floor(Math.random() * aDict.length)];
@@ -82,9 +76,9 @@ function pointsscored () {
 }
 
 function checkAnswer() {
-	var answer = multiplechoice.guess;
+//	var guess = multiplechoice.guess;
 
-	console.log(answer);
+	console.log("does " + guess + " = " + answer);
 
 	if (answer == "")
 		return;

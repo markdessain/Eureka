@@ -21,8 +21,8 @@
 
 		<div data-role="content" id="playing">
 			<audio id="phrase" preload="auto" oncanplaythrough="this.play();" controls>
-				<source id="html5" src="https://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files/CY/do-you-know-how-to-go-there.m4a" type="audio/mpeg">
-				<embed id="html4"src="https://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files/CY/do-you-know-how-to-go-there.m4a" height=45 width=200 autostart=true>
+				<source id="html5" src="" type="audio/mpeg">
+				<embed id="html4" src="" height=45 width=200 autostart=true>
 			</audio>
 			<div id="middlepanel" align="right">
 				<span id="error"> 
@@ -33,10 +33,10 @@
 				</span>
 			</div>
 			<form action="#" id="multiplechoice" onsubmit="checkAnswer(); return false;">
-				<button name="guess1" value="1">One</button>
-				<button name="guess2" value="2">Two</button>
-				<button name="guess3" value="3">Three</button>
-				<button name="guess4" value="4">Four</button>
+				<button name="guess1" onclick="guess = this.innerHTML;" value="1">?</button>
+				<button name="guess2" onclick="guess = this.innerHTML;" value="2">?</button>
+				<button name="guess3" onclick="guess = this.innerHTML;" value="3">?</button>
+				<button name="guess4" onclick="guess = this.innerHTML;" value="4">?</button>
 			</form>
 		</div>
 		<div data-role="content" id="gameover" style="display:none">
