@@ -6,27 +6,23 @@ var scoreboard = document.getElementById("score");
 var html5audio = document.getElementById("html5");
 var html4audio = document.getElementById("html4");
 var countdownboard = document.getElementById("timer");
-var guess1 = document.forms["multiplechoice"].elements["guess1"];
-var guess2 = document.forms["multiplechoice"].elements["guess2"];
-var guess3 = document.forms["multiplechoice"].elements["guess3"];
-var guess4 = document.forms["multiplechoice"].elements["guess4"];
+var multiplechoice = document.forms["multiplechoice"];
+var guess1 = multiplechoice.elements["guess1"];
+var guess2 = multiplechoice.elements["guess2"];
+var guess3 = multiplechoice.elements["guess3"];
+var guess4 = multiplechoice.elements["guess4"];
 var errorboard = document.getElementById("error");
 var questionboard = document.getElementById("question");
 var TimeToFade = 1000.0;
 var gameover = document.getElementById("gameover");
-var finishedsentence = document.getElementById("finishedsentence");
 var playing = document.getElementById("playing");
-var tryagainbutton = document.getElementById("tryword");
 
-var sentence = [];
 var score = 0;
 var question = 1;
+var answer = "";
 var maxquestions = 20;
 var timer = 10;
 var timeout = null;
-var lastword = null;
-var aDict;
-var combo = 0;
 /*
 $.getJSON("letters/aDict.json", function(data){
 	aDict = data;
@@ -62,18 +58,14 @@ function countdown() {
 
 function nextquestion() {
 	clearTimeout(timeout);
-	var qn = nextQuestion();
-	qn.answer = "do-you-know-how-to-go-there";
-	qn.choices = ["blah1", "blah2", "blah3", "blah4"];
-//	audiourl = audiodirectory + "CY" + "/" + phrase.toLowerCase() + ".m4a";
+	var qn = newQuestion();
+	answer = qn.answer;
 	html4audio.src = qn.mp3;
 	html4audio.src = qn.mp3;
-	guess1.innerHTML = gqn.choices[0];
+	guess1.innerHTML = qn.choices[0];
 	guess2.innerHTML = qn.choices[1];
 	guess3.innerHTML = qn.choices[2];
 	guess4.innerHTML = qn.choices[3];
-
-	lastwordboard.innerHTML = lastword;
 	timer = 10;
 	countdownboard.innerHTML = String(timer);
 	gameover.style.display = "none";
@@ -82,28 +74,21 @@ function nextquestion() {
 }
 
 function pointsscored () {
-	return timer * pointsCombo;
+	return timer;
 }
 
 function checkAnswer() {
-	var answer = (firstletterboard.value + nextwordboard.value).toLowerCase();
+	var answer = multiplechoice.guess;
+
+	console.log(answer);
 
 	if (answer == "")
 		return;
 
-	if (notAlready(answer)) {
-		if (checkIfCorrect(answer) ) {
-			positiveScore();
-
-			lastword = answer;
-
-			reset();
-		}
-		else {
-			error(1);
-		}
+	if (true) {
+		nextquestion();
 	}
-	else{
+	else {
 		error(2); //answer does not exist in dictionary
 	}
 }
@@ -203,16 +188,6 @@ function animateFade(lastTick)
 	errorboard.style.filter = 'alpha(opacity = ' + (newOpVal*100) + ')';
 
 	setTimeout("animateFade(" + curTick + ",'" + "error" + "')", 33);
-}
-
-function notAlready(answer) {
-	return (sentence.indexOf(answer) <= 0);
-}
-
-
-
-function checkIfCorrect(answer) {
-	return (aDict.indexOf(answer) > 0);
 }
 
 //nextquestion();
