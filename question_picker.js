@@ -32,7 +32,7 @@ function pickAnswerAndChoices(baseDirectory, questions, category, numberOfChoice
         language: language,
         category: category,
         answer: answer,
-        mp3: baseDirectory + '/' + language + '/' + convertToSlug(answer) + '.mp3',
+        mp3: baseDirectory + '/' + language + '/' + convertToSlug(answer) + '.m4a',
         choices: choices
     }
 }
