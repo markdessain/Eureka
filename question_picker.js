@@ -16,7 +16,7 @@ function shuffle(o) {
 
 
 function convertToSlug(Text) {
-    return Text.toLowerCase().replace(/ /g,'_').replace(/[^\w-]+/g,'');
+    return Text.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
 }
 
 
@@ -49,63 +49,58 @@ function getChoices(data, baseDirectory, numberOfChoices) {
 answered = []
 data = {
     words: {
-        "Hello": ["FR", "DE"],
-        "Goodbye": ["FR", "DE"],
-        "Yes": ["FR", "DE"],
-        "No": ["FR", "DE"],
-        "Thanks": ["FR", "DE"],
-        "Sorry": ["FR", "DE"],
-        "Now": ["FR", "DE"],
-        "Later": ["FR", "DE"],
-        "Water": ["FR", "DE"],
-        "Toilet": ["FR", "DE"],
-        "Rain": ["FR", "DE"],
-        "Snow": ["FR", "DE"],
-        "Hot": ["FR", "DE"],
-        "Cold": ["FR", "DE"],
-        "Dog": ["FR", "DE"],
-        "Cat": ["FR", "DE"]
+        "Hello": ["CY"],
+        "Goodbye": ["CY"],
+        "Yes": ["CY"],
+        "No": ["CY"],
+        "Thanks": ["CY"],
+        "Sorry": ["CY"],
+        "Now": ["CY"],
+        "Later": ["CY"],
+        "Water": ["CY"],
+        "Toilet": ["CY"],
+        "Rain": ["CY"],
+        "Snow": ["CY"],
+        "Hot": ["CY"],
+        "Cold": ["CY"],
+        "Dog": ["CY"],
+        "Cat": ["CY"]
     },
     short_questions: {
-        "Where are you going?": ["FR", "DE"],
-        "What do you want?": ["FR", "DE"],
-        "Do you need this?": ["FR", "DE"],
-        "When are you leaving?": ["FR", "DE"]
+        "Where are you going?": ["CY"],
+        "What do you want?": ["CY"],
+        "Do you need this?": ["CY"],
+        "When are you leaving?": ["CY"]
     },
     short_statements: {
-		"It is not here.": ["FR", "DE"], 
-        "The train has left.": ["FR", "DE"],
-        "Please come with me.": ["FR", "DE"],
-        "I can't help you": ["FR", "DE"]
+		"It is not here.": ["CY"], 
+        "The train has left.": ["CY"],
+        "Please come with me.": ["CY"],
+        "I can't help you": ["CY"]
     },
     long_questions: {
-        "You can't go there now.": ["FR", "DE"],
-        "You must take a train there.": ["FR", "DE"],
-        "It is very far from here.": ["FR", "DE"],
-        "I don't know where it is.": ["FR", "DE"]
+        "You can't go there now.": ["CY"],
+        "You must take a train there.": ["CY"],
+        "It is very far from here.": ["CY"],
+        "I don't know where it is.": ["CY"]
     },
     long_statements: {
-        "What would you like to drink?": ["FR", "DE"],
-        "Where do you want to go tomorrow?": ["FR", "DE"],
-        "Would you like anything else now?": ["FR", "DE"],
-        "Do you know how to go there?": ["FR", "DE"]
+        "What would you like to drink?": ["CY"],
+        "Where do you want to go tomorrow?": ["CY"],
+        "Would you like anything else now?": ["CY"],
+        "Do you know how to go there?": ["CY"]
     }
 }
 baseDirectory = 'http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files'
 
 function newQuestion() {
-
 	// This is a horrible way for making sure the same audio clip doesn't appear twice
 	// but as long as the number of questions is far below the number of possible answers it will be ok.
-
 	do {
 		// Keep looping until we find an unseen answer
 		result = getChoices(data, baseDirectory, 4);
 	}
 	while (answered.indexOf(result.answer + result.language) >= 0);
-
 	answered.push(result.answer + result.language)
-
 	return result;
-
 }
