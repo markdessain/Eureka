@@ -1,7 +1,6 @@
 var questionsURL = "http://spreadsheets.google.com/feeds/list/0AmGNdVG13yM4dFlhcjFYRUN2c1lUdHpBU1ozazliWGc/od6/public/values?alt=json";
 var audiodirectory = "http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files/";
 
-
 var scoreboard = document.getElementById("score");
 var phrase = document.getElementById("phrase");
 var html5audio = document.getElementById("html5");
@@ -23,20 +22,10 @@ var question = 0;
 var answer = "";
 var lang = "";
 var guess = "";
-var maxquestions = 2;
+var maxquestions = 20;
 var timer = 10;
 var timeout = null;
-/*
-function playAgain() {
-	lastword = aDict[Math.floor(Math.random() * aDict.length)];
-	question = 1;
-	score = 0;
-	sentence = [];
-	comboboard.innerHTML = 0;
-	scoreboard.innerHTML = 0;
-	nextquestion();
-}
-*/
+
 function gameResults(){
 	console.log("game over at qn " + question);
 	// set up results page...
@@ -103,6 +92,7 @@ function checkAnswer() {
 }
 
 function displayResult(message){
+	// TODO: disable multiplechoice inputs and highlight correct answer in green
 	errorboard.innerHTML = message;
 	errorboard.style.FadeState = null;
 	errorboard.style.opacity = 1;

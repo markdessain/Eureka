@@ -1,29 +1,37 @@
 body {
-	font-family:Verdana,Helvetica,Arial,sans-serif;
-	color:#777;
-	background-color: #dfc;
+	font-family:Verdana,Arial,sans-serif;
+	color:#000;
+	background-color:#dfc;
 	text-align:center;
 }
 
-@media print, screen and (min-width: 480px) {
-	body {
-		font-size:200%;
-	}
-}
-
-}
 .gameboard {
 	background-color:#eee;
 	overflow:visible;
 	border-radius:1em;
 	border:1px solid #ddd;
-	padding:1em;
+	padding:1px;
 	box-shadow:inset #fff 0 3px 0, inset rgba(0,0,0,0.03) 0 -3px 0;
+}
+
+@media print, screen and (max-width: 480px) {
+	body {
+		margin:0;
+	}
+}
+
+@media print, screen and (min-width: 595px) {
+	body {
+		font-size:200%;
+	}
+	.gameboard {
+		padding:1em;
+	}
 }
 
 @media print, screen and (min-width: 768px) {
 	.gameboard {
-		width: 680px;
+		width: 595px;
 		margin: 0 auto;
 	}
 }
