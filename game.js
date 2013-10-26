@@ -3,6 +3,7 @@ var audiodirectory = "http://dl.dropboxusercontent.com/u/26353384/Language%20sou
 
 
 var scoreboard = document.getElementById("score");
+var phrase = document.getElementById("phrase");
 var html5audio = document.getElementById("html5");
 var html4audio = document.getElementById("html4");
 var countdownboard = document.getElementById("timer");
@@ -61,7 +62,10 @@ function nextquestion() {
 	var qn = newQuestion();
 	answer = qn.answer;
 	html4audio.src = qn.mp3;
-	html4audio.src = qn.mp3;
+	html5audio.src = qn.mp3;
+	console.log(qn.mp3);
+	phrase.load();
+	phrase.play();
 	guess1.innerHTML = qn.choices[0];
 	guess2.innerHTML = qn.choices[1];
 	guess3.innerHTML = qn.choices[2];
@@ -190,4 +194,4 @@ function animateFade(lastTick)
 	setTimeout("animateFade(" + curTick + ",'" + "error" + "')", 33);
 }
 
-//nextquestion();
+nextquestion();
