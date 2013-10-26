@@ -22,14 +22,14 @@ body {
 
 @media print, screen and (min-width: 595px) {
 	body {
-		font-size:200%;
+		font-size:175%;
 	}
 	.gameboard {
 		padding:1em;
 	}
 }
 
-@media print, screen and (min-width: 768px) {
+@media print, screen and (min-width: 670px) {
 	.gameboard {
 		width: 595px;
 		margin: 0 auto;

@@ -1,4 +1,6 @@
-data = {
+"use strict";
+
+var data = {
     "words": {
         "Hello": ["CY", "ES", "ZH", "FR"],
         "Goodbye": ["CY", "ES", "ZH", "FR"],
@@ -36,7 +38,7 @@ data = {
     },
     "long_statements": {
         "You can't go there now.": ["CY", "ES", "ZH", "FR"],
-        "You must take a train there.": ["CY", "ES", "ZH", "FR"],
+        "You must take the train there.": ["CY", "ES", "ZH", "FR"],
         "It is very far from here.": ["CY", "ES", "ZH", "FR"],
         "You have to buy a ticket here.": ["CY", "ES", "ZH", "FR"],
         "You can go to the beach tonight.": ["CY", "ES", "ZH", "FR"],

@@ -3,8 +3,9 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<meta charset="UTF-8">
+	<title>Eureka Languages Challenge</title>
 	<link rel="stylesheet" type="text/css" href="css/game.css">
-	<script lang="text/javascript" src="jquery/jquery.js"></script>
+	<xscript lang="text/javascript" src="jquery/jquery.js"></xscript>
 </head>
 <body>
 	<div data-role="page" class="gameboard">
@@ -14,22 +15,18 @@
 				<span id="score">0</span>
 				<span class="spacer"> </span>
 				<span> Qn </span> 
-				<span id="question"> 1</span><span>/20 </span>
+				<span id="question">1</span><span>/20 </span>
 			</div>
 		</header>
 
 		<div data-role="content" id="playing" style="display:none">
-			<audio id="phrase" preload="auto" oncanplaythrough="this.play();" controls>
+			<audio id="speak" preload="auto" oncanplaythrough="this.play();" autoplay controls>
 				<source id="html5" src="" type="audio/mpeg">
 				<embed id="html4" src="" height=45 width=200 autostart=true>
 			</audio>
 			<div id="middlepanel" align="right">
-				<span id="error"> 
-					
-				</span>
-				<span id="timer">
-					10
-				</span>
+				<span id="error"></span>
+				<span id="timer">10</span>
 			</div>
 			<form action="#" id="multiplechoice" onsubmit="checkAnswer(); return false;">
 				<button name="guess1" onclick="guess = this.innerHTML;" value="1">?</button>
