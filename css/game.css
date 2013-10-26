@@ -1,11 +1,17 @@
 body {
 	font-family:Verdana,Helvetica,Arial,sans-serif;
-	font-size:200%;
 	color:#777;
 	background-color: #dfc;
 	text-align:center;
 }
 
+@media print, screen and (min-width: 480px) {
+	body {
+		font-size:200%;
+	}
+}
+
+}
 .gameboard {
 	background-color:#eee;
 	overflow:visible;
@@ -126,9 +132,16 @@ body {
 #playagain {
 	width: 100px;
 }
-
-#gameover {
+/*
+.gameover {
 	text-align: center;
+}
+*/
+html .fb_share_button {
+	color:#fff;
+	border-color:#295582;
+	background:#3b5998;
+	text-decoration:none;
 }
 
 @media print, screen and (max-width: 640px) {
@@ -139,27 +152,7 @@ body {
 		font-size: 100%;
 	}
 }
-/*
-#title {
-	font-size: 1em;
-	margin:0.6em;
-	padding:0.4em;
-	color:#fff;
-	text-align: center;
-	-moz-box-shadow:0 0 10px #303030;
-	-webkit-box-shadow:0 0 10px #303030;
-	-o-box-shadow:0 0 10px #303030;
-	box-shadow:0 0 10px #303030;
-	filter:progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF696969', endColorstr='#FF252525');
-	background:#252525;
-	border-radius: 15px;
-	background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #696969), color-stop(95%, #363636), color-stop(97%, #313131), color-stop(100%, #252525));
-	background-image:-webkit-linear-gradient(top, #696969 0%,#363636 95%,#313131 97%,#252525 100%);
-	background-image:-moz-linear-gradient(top, #696969 0%,#363636 95%,#313131 97%,#252525 100%);
-	background-image:-o-linear-gradient(top, #696969 0%,#363636 95%,#313131 97%,#252525 100%);
-	background-image:linear-gradient(top, #696969 0%,#363636 95%,#313131 97%,#252525 100%)
-}
-*/
+
 button {
 	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;

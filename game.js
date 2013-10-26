@@ -19,13 +19,14 @@ var gameover = document.getElementById("gameover");
 var playing = document.getElementById("playing");
 
 var score = 0;
-var question = 1;
+var question = 0;
 var answer = "";
+var lang = "";
 var guess = "";
-var maxquestions = 20;
+var maxquestions = 2;
 var timer = 10;
 var timeout = null;
-
+/*
 function playAgain() {
 	lastword = aDict[Math.floor(Math.random() * aDict.length)];
 	question = 1;
@@ -35,26 +36,37 @@ function playAgain() {
 	scoreboard.innerHTML = 0;
 	nextquestion();
 }
-
-function youlose(){
-	nextwordboard.disabled = true;
-	nextwordboard.value = "";
-	timeout = setTimeout('gameover.style.display = "block";', 500);
+*/
+function gameResults(){
+	console.log("game over at qn " + question);
+	// set up results page...
+	timeout = setTimeout('playing.style.display="none"; gameover.style.display="block";', 500);
 }
 
 function countdown() {
 	timer--;
 	countdownboard.innerHTML = String(timer);
-	if (timer === 0)
-		youlose();
-	else
+	if (timer === 0) {
+		displayResult("Too slow! I said '" + answer + "' in " + lang);
+		setTimeout('nextquestion()', 3000);
+	}
+	else {
 		timeout = setTimeout('countdown()', 1000);
+	}
 }
 
 function nextquestion() {
+	playing.style.display = "block";
+	fade();
 	clearTimeout(timeout);
+	if (question == maxquestions) {
+		gameResults();
+		return;
+	}
+	questionboard.innerHTML = String(++question);
 	var qn = newQuestion();
 	answer = qn.answer;
+	lang = qn.language;
 	html4audio.src = qn.mp3;
 	html5audio.src = qn.mp3;
 	console.log(qn.mp3);
@@ -76,69 +88,25 @@ function pointsscored () {
 }
 
 function checkAnswer() {
-//	var guess = multiplechoice.guess;
-
+	clearTimeout(timeout);
 	console.log("does " + guess + " = " + answer);
 
-	if (answer == "")
-		return;
-
-	if (true) {
-		nextquestion();
+	if (answer == guess) {
+		score += pointsscored();
+		scoreboard.innerHTML = String(score);
+		displayResult("Correct! That was " + lang);
 	}
 	else {
-		error(2); //answer does not exist in dictionary
+		displayResult("No! I said '" + answer + "' in " + lang);
 	}
+	setTimeout('nextquestion()', 3000);
 }
 
-function positiveScore() {
-	combo++;
-	var extra = "";
-
-	if (combo > 5){
-		if (combo > 30){
-			if (combo > 200) {
-				extra = "  x4";
-				pointsCombo = 4;
-			}
-			else {
-				extra = "  x3";
-				pointsCombo = 3;
-			}
-		}
-		else {
-			extra = "  x2";
-			pointsCombo = 2;
-		}
-	}
-
-	score += pointsscored();
-
-	scoreboard.innerHTML = String(score);
-
-	comboboard.innerHTML = combo + extra;
-}
-
-function error(type){
-	combo = 0;
-	pointsCombo = 1;
-	comboboard.innerHTML = 0;
-
-	switch (type)
-	{
-		case 1:
-			displayError("Word is not recognized");
-			break;
-		case 2:
-			displayError("Word already used");
-	}
-}
-
-function displayError(message){
+function displayResult(message){
 	errorboard.innerHTML = message;
 	errorboard.style.FadeState = null;
 	errorboard.style.opacity = 1;
-	setTimeout(fade(), 1000);
+//	setTimeout(fade(), 5000);
 }
 
 function fade(){
