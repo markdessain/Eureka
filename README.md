@@ -1,4 +1,4 @@
-Last-Letter-Game
-================
+Eureka Languages Challenge Game
+===============================
 
-The traditional "Say a word starting with the last letter" game is brought to the web app word
+Challenge to recognise spoken foreign phrases in this multiple-choice game
