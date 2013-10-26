@@ -91,9 +91,9 @@ data = {
         "Do you know how to go there?": ["FR", "DE"]
     }
 }
-baseDirectory = 'http://dropbox.com/abc/xyz'
+baseDirectory = 'http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files'
 
-function nextQuestion() {
+function newQuestion() {
 
 	// This is a horrible way for making sure the same audio clip doesn't appear twice
 	// but as long as the number of questions is far below the number of possible answers it will be ok.
@@ -106,12 +106,6 @@ function nextQuestion() {
 
 	answered.push(result.answer + result.language)
 
-	console.log(result.mp3);
-	console.log(result.answer);
-	console.log(result.language);
-	console.log(result.choices[0]);
-	console.log(result.choices[1]);
-	console.log(result.choices[2]);
-	console.log(result.choices[3]);
+	return result;
 
 }
