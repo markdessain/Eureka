@@ -46,55 +46,65 @@ function getChoices(data, baseDirectory, numberOfChoices) {
 }
 
 
-function run() {
+answered = []
+data = {
+    words: {
+        "Hello": ["FR", "DE"],
+        "Goodbye": ["FR", "DE"],
+        "Yes": ["FR", "DE"],
+        "No": ["FR", "DE"],
+        "Thanks": ["FR", "DE"],
+        "Sorry": ["FR", "DE"],
+        "Now": ["FR", "DE"],
+        "Later": ["FR", "DE"],
+        "Water": ["FR", "DE"],
+        "Toilet": ["FR", "DE"],
+        "Rain": ["FR", "DE"],
+        "Snow": ["FR", "DE"],
+        "Hot": ["FR", "DE"],
+        "Cold": ["FR", "DE"],
+        "Dog": ["FR", "DE"],
+        "Cat": ["FR", "DE"]
+    },
+    short_questions: {
+        "Where are you going?": ["FR", "DE"],
+        "What do you want?": ["FR", "DE"],
+        "Do you need this?": ["FR", "DE"],
+        "When are you leaving?": ["FR", "DE"]
+    },
+    short_statements: {
+		"It is not here.": ["FR", "DE"], 
+        "The train has left.": ["FR", "DE"],
+        "Please come with me.": ["FR", "DE"],
+        "I can't help you": ["FR", "DE"]
+    },
+    long_questions: {
+        "You can't go there now.": ["FR", "DE"],
+        "You must take a train there.": ["FR", "DE"],
+        "It is very far from here.": ["FR", "DE"],
+        "I don't know where it is.": ["FR", "DE"]
+    },
+    long_statements: {
+        "What would you like to drink?": ["FR", "DE"],
+        "Where do you want to go tomorrow?": ["FR", "DE"],
+        "Would you like anything else now?": ["FR", "DE"],
+        "Do you know how to go there?": ["FR", "DE"]
+    }
+}
+baseDirectory = 'http://dropbox.com/abc/xyz'
 
-	data = {
-	    words: {
-	        "Hello": ["FR", "DE"],
-	        "Goodbye": ["FR", "DE"],
-	        "Yes": ["FR", "DE"],
-	        "No": ["FR", "DE"],
-	        "Thanks": ["FR", "DE"],
-	        "Sorry": ["FR", "DE"],
-	        "Now": ["FR", "DE"],
-	        "Later": ["FR", "DE"],
-	        "Water": ["FR", "DE"],
-	        "Toilet": ["FR", "DE"],
-	        "Rain": ["FR", "DE"],
-	        "Snow": ["FR", "DE"],
-	        "Hot": ["FR", "DE"],
-	        "Cold": ["FR", "DE"],
-	        "Dog": ["FR", "DE"],
-	        "Cat": ["FR", "DE"]
-	    },
-	    short_questions: {
-	        "Where are you going?": ["FR", "DE"],
-	        "What do you want?": ["FR", "DE"],
-	        "Do you need this?": ["FR", "DE"],
-	        "When are you leaving?": ["FR", "DE"]
-	    },
-	    short_statements: {
-			"It is not here.": ["FR", "DE"], 
-	        "The train has left.": ["FR", "DE"],
-	        "Please come with me.": ["FR", "DE"],
-	        "I can't help you": ["FR", "DE"]
-	    },
-	    long_questions: {
-	        "You can't go there now.": ["FR", "DE"],
-	        "You must take a train there.": ["FR", "DE"],
-	        "It is very far from here.": ["FR", "DE"],
-	        "I don't know where it is.": ["FR", "DE"]
-	    },
-	    long_statements: {
-	        "What would you like to drink?": ["FR", "DE"],
-	        "Where do you want to go tomorrow?": ["FR", "DE"],
-	        "Would you like anything else now?": ["FR", "DE"],
-	        "Do you know how to go there?": ["FR", "DE"]
-	    }
+function nextQuestion() {
+
+	// This is a horrible way for making sure the same audio clip doesn't appear twice
+	// but as long as the number of questions is far below the number of possible answers it will be ok.
+
+	do {
+		// Keep looping until we find an unseen answer
+		result = getChoices(data, baseDirectory, 4);
 	}
+	while (answered.indexOf(result.answer + result.language) >= 0);
 
-	baseDirectory = 'http://dropbox.com/abc/xyz'
-	result = getChoices(data, baseDirectory, 4)
+	answered.push(result.answer + result.language)
 
 	console.log(result.mp3);
 	console.log(result.answer);
@@ -103,4 +113,5 @@ function run() {
 	console.log(result.choices[1]);
 	console.log(result.choices[2]);
 	console.log(result.choices[3]);
+
 }
