@@ -1,3 +1,4 @@
+var questionsURL = "http://spreadsheets.google.com/feeds/list/0AmGNdVG13yM4dFlhcjFYRUN2c1lUdHpBU1ozazliWGc/od6/public/values?alt=json";
 var scoreboard = document.getElementById("score");
 var lastwordboard = document.getElementById("lastword");
 var countdownboard = document.getElementById("timer");
