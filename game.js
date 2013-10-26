@@ -1,38 +1,48 @@
 var questionsURL = "http://spreadsheets.google.com/feeds/list/0AmGNdVG13yM4dFlhcjFYRUN2c1lUdHpBU1ozazliWGc/od6/public/values?alt=json";
+var audiodirectory = "http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files/";
+
+
 var scoreboard = document.getElementById("score");
-var lastwordboard = document.getElementById("lastword");
+var html5audio = document.getElementById("html5");
+var html4audio = document.getElementById("html4");
 var countdownboard = document.getElementById("timer");
-var nextwordboard = document.getElementById("nextword");
-var firstletterboard = document.getElementById("firstletter");
+var guess1 = document.forms["multiplechoice"].elements["guess1"];
+var guess2 = document.forms["multiplechoice"].elements["guess2"];
+var guess3 = document.forms["multiplechoice"].elements["guess3"];
+var guess4 = document.forms["multiplechoice"].elements["guess4"];
 var errorboard = document.getElementById("error");
-var comboboard = document.getElementById("combo");
+var questionboard = document.getElementById("question");
 var TimeToFade = 1000.0;
 var gameover = document.getElementById("gameover");
 var finishedsentence = document.getElementById("finishedsentence");
 var playing = document.getElementById("playing");
 var tryagainbutton = document.getElementById("tryword");
+
 var sentence = [];
 var score = 0;
+var question = 1;
+var maxquestions = 20;
 var timer = 10;
 var timeout = null;
 var lastword = null;
-var pointsCombo = 1;
 var aDict;
 var combo = 0;
+/*
 $.getJSON("letters/aDict.json", function(data){
 	aDict = data;
 	lastword = data[Math.floor(Math.random() * data.length)];
-	reset();
+	nextquestion();
 });
+*/
 
 function playAgain() {
 	lastword = aDict[Math.floor(Math.random() * aDict.length)];
-	combo = 0;
+	question = 1;
 	score = 0;
 	sentence = [];
 	comboboard.innerHTML = 0;
 	scoreboard.innerHTML = 0;
-	reset();
+	nextquestion();
 }
 
 function youlose(){
@@ -44,25 +54,31 @@ function youlose(){
 function countdown() {
 	timer--;
 	countdownboard.innerHTML = String(timer);
-	if (timer == 0)
+	if (timer === 0)
 		youlose();
 	else
 		timeout = setTimeout('countdown()', 1000);
 }
 
-
-function reset() {
+function nextquestion() {
 	clearTimeout(timeout);
+	var qn = nextQuestion();
+	qn.answer = "do-you-know-how-to-go-there";
+	qn.choices = ["blah1", "blah2", "blah3", "blah4"];
+//	audiourl = audiodirectory + "CY" + "/" + phrase.toLowerCase() + ".m4a";
+	html4audio.src = qn.mp3;
+	html4audio.src = qn.mp3;
+	guess1.innerHTML = gqn.choices[0];
+	guess2.innerHTML = qn.choices[1];
+	guess3.innerHTML = qn.choices[2];
+	guess4.innerHTML = qn.choices[3];
+
 	lastwordboard.innerHTML = lastword;
-	sentence.push(lastword);
-	firstletterboard.value = lastword.substr(lastword.length - 1, lastword.length).toUpperCase();
-	nextwordboard.value = "";
 	timer = 10;
 	countdownboard.innerHTML = String(timer);
 	gameover.style.display = "none";
 	playing.style.display = "block";
 	timeout = setTimeout('countdown()', 1000);
-	nextwordboard.disabled = false;
 }
 
 function pointsscored () {
@@ -199,4 +215,4 @@ function checkIfCorrect(answer) {
 	return (aDict.indexOf(answer) > 0);
 }
 
-
+//nextquestion();
