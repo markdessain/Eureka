@@ -24,7 +24,7 @@
 				<source id="html5" src="" type="audio/mpeg">
 				<embed id="html4" src="" height=45 width=200 autostart=true>
 			</audio>
-			<div id="middlepanel" align="right">
+			<div class="midpanel" align="right">
 				<span id="error"></span>
 				<span id="timer">10</span>
 			</div>
@@ -38,12 +38,12 @@
 		<div data-role="content" id="gameover" style="display:none">
 			<h3 id="finishedsentence">Game over</h3>
 			<a href="index.html"><button id="playagain">Play again</button></a>
-			<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script>
-			<div id="sharefacebook">
-				<a rel="nofollow" href="http://www.facebook.com/share.php?u=<;url>" class="fb_share_button" onclick="return fbs_click()" target="_blank" xstyle="text-decoration:none;">
-					Share with facebook
-				<img src="http://www.usphs.gov/images/home/facebook-logo.png" width="40px"/></a>
-			</div>
+			<script>function fbs_click() {u="http://bit.ly/eurekalanguages";t="Take the Eureka Languages Challenge Yourself";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script>
+			<p>
+				<a rel="nofollow" href="http://www.facebook.com/share.php?u=http%3A%2F%2Fbit.ly%2Feurekalanguages" class="fb_share_button" onclick="return fbs_click()" target="_blank">
+					&nbsp;Share with facebook
+				<img src="http://www.usphs.gov/images/home/facebook-logo.png" width="40px" /></a>
+			</p>
 		</div>
 	</div>
 	<script lang="text/javascript" src="questions.js"></script>
