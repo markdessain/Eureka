@@ -1,3 +1,5 @@
+"use strict";
+
 var scoreboard = document.getElementById("score");
 var speak = document.getElementById("speak");
 var html5audio = document.getElementById("html5");
@@ -10,6 +12,7 @@ var guess3 = multiplechoice.elements["guess3"];
 var guess4 = multiplechoice.elements["guess4"];
 var errorboard = document.getElementById("error");
 var questionboard = document.getElementById("question");
+var resultsboard = document.getElementById("results");
 var TimeToFade = 1000.0;
 var gameover = document.getElementById("gameover");
 var playing = document.getElementById("playing");
@@ -22,10 +25,19 @@ var guess = "";
 var maxquestions = 20;
 var timer = 10;
 var timeout = null;
+var histogram = [];
+histogram["Welsh"] = [0, 0];
+histogram["Spanish"] = [0, 0];
+histogram["Mandarin"] = [0, 0];
+histogram["French"] = [0, 0];
 
 function gameResults(){
-	console.log("game over at qn " + question);
-	// set up results page...
+	var result = "";
+    for (var bar in histogram) {
+		result += histogram[bar][0] + '/' + histogram[bar][1] + " in " + bar + ", ";
+	}
+	result += "correct";
+	resultsboard.innerHTML = "You got " + result + '!';
 	timeout = setTimeout('playing.style.display="none"; gameover.style.display="block";', 500);
 }
 
@@ -75,9 +87,9 @@ function pointsscored () {
 
 function checkAnswer() {
 	clearTimeout(timeout);
-	console.log("does " + guess + " = " + answer);
-
+	histogram[lang][1]++;
 	if (answer == guess) {
+		histogram[lang][0]++;
 		score += pointsscored();
 		scoreboard.innerHTML = String(score);
 		displayResult("Correct! That was " + lang);
@@ -93,7 +105,6 @@ function displayResult(message){
 	errorboard.innerHTML = message;
 	errorboard.style.FadeState = null;
 	errorboard.style.opacity = 1;
-//	setTimeout(fade(), 5000);
 }
 
 function fade(){
@@ -126,8 +137,7 @@ function animateFade(lastTick)
 	if(errorboard.FadeTimeLeft <= elapsedTicks)
 	{
 		errorboard.style.opacity = errorboard.FadeState == 1 ? '1' : '0';
-		errorboard.style.filter = 'alpha(opacity = '
-			+ (errorboard.FadeState == 1 ? '100' : '0') + ')';
+		errorboard.style.filter = 'alpha(opacity = ' + (errorboard.FadeState == 1 ? '100' : '0') + ')';
 		errorboard.FadeState = errorboard.FadeState == 1 ? 2 : -2;
 		return;
 	}
