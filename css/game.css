@@ -30,6 +30,9 @@ body {
 }
 
 @media print, screen and (min-width: 670px) {
+	body {
+		background-image:url('http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files/flags.png');
+	}
 	.gameboard {
 		width:595px;
 		margin:0 auto;
