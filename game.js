@@ -13,7 +13,6 @@ var guess4 = multiplechoice.elements["guess4"];
 var errorboard = document.getElementById("error");
 var questionboard = document.getElementById("question");
 var resultsboard = document.getElementById("results");
-var TimeToFade = 1000.0;
 var gameover = document.getElementById("gameover");
 var playing = document.getElementById("playing");
 var chart = createChart();
@@ -39,8 +38,8 @@ function gameResults(){
         correct.push(histogram[bar][0]);
         incorrect.push(histogram[bar][1] - histogram[bar][0]);
     }
-    chart.series[0].setData(correct,false);
-    chart.series[1].setData(incorrect,true);
+    chart.series[0].setData(incorrect,false);
+    chart.series[1].setData(correct,true);
 
     timeout = setTimeout('playing.style.display="none"; gameover.style.display="block";', 500);
 }

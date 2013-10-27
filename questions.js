@@ -33,7 +33,7 @@ var data = {
         "When are you leaving?": ["Welsh", "Spanish", "Mandarin", "French"]
     },
     "short_statements": {
-        "We open at 10:00.": ["Welsh", "Spanish", "Mandarin", "French"],
+        "We open at ten.": ["Welsh", "Spanish", "Mandarin", "French"],
         "I don't speak English.": ["Welsh", "Spanish", "Mandarin", "French"],
 		"It is not here.": ["Welsh", "Spanish", "Mandarin", "French"],
         "The train has left.": ["Welsh", "Spanish", "Mandarin", "French"],
