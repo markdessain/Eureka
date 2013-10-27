@@ -36,6 +36,13 @@ body {
 	}
 }
 
+.green {
+	color:#060;
+}
+.red {
+	color:#600;
+}
+
 .scoreboard {
 	margin:0.6em;
 	padding:0.4em;
