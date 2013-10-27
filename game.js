@@ -87,7 +87,7 @@ function checkAnswer() {
 	clearTimeout(timeout);
 	if (answer == guess) {
 		histogram[lang][0]++;
-		score += timer();
+		score += timer;
 		scoreboard.innerHTML = String(score);
 		displayResult("<b class='green'>Correct!</b> That was " + lang);
 	}
