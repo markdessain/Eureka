@@ -16,6 +16,7 @@ var resultsboard = document.getElementById("results");
 var TimeToFade = 1000.0;
 var gameover = document.getElementById("gameover");
 var playing = document.getElementById("playing");
+var chart = createChart();
 
 var score = 0;
 var question = 0;
@@ -32,12 +33,15 @@ histogram["Mandarin"] = [0, 0];
 histogram["French"] = [0, 0];
 
 function gameResults(){
-	var result = "";
+	var correct = []
+	var incorrect = []
     for (var bar in histogram) {
-		result += histogram[bar][0] + '/' + histogram[bar][1] + " in " + bar + ", ";
+    	correct.push(histogram[bar][0]);
+    	incorrect.push(histogram[bar][1]);
 	}
-	result += "correct";
-	resultsboard.innerHTML = "You got " + result + '!';
+	chart.series[0].setData(correct,false);
+	chart.series[1].setData(incorrect,true);
+
 	timeout = setTimeout('playing.style.display="none"; gameover.style.display="block";', 500);
 }
 
@@ -94,7 +98,6 @@ function checkAnswer() {
 	guess2.disabled = true;
 	guess3.disabled = true;
 	guess4.disabled = true;
-	histogram[lang][1]++;
 	if (answer == guess) {
 		histogram[lang][0]++;
 		score += pointsscored();
@@ -102,6 +105,7 @@ function checkAnswer() {
 		displayResult("Correct! That was " + lang);
 	}
 	else {
+		histogram[lang][1]++;
 		displayResult("No! I said '" + answer + "' in " + lang);
 	}
 	setTimeout('nextquestion()', 3000);
@@ -157,6 +161,51 @@ function animateFade(lastTick)
 	errorboard.style.filter = 'alpha(opacity = ' + (newOpVal*100) + ')';
 
 	setTimeout("animateFade(" + curTick + ",'" + "error" + "')", 33);
+}
+
+function createChart() {
+
+	var chart = new Highcharts.Chart({
+        chart: {
+            type: 'column',
+            renderTo: 'results'
+        },
+        title: {
+            text: 'Scores in each of the languages',
+            color: '#000'
+        },
+        xAxis: {
+            categories: ["Welsh", "Spanish", "Mandarin", "French"]
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Questions'
+            },
+            color: '#000'
+        },
+        legend: {
+            backgroundColor: '#FFFFFF',
+            reversed: true
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+            series: [{
+            name: 'Correct',
+            color: '#5cb85c',
+            data: []
+        }, {
+            name: 'Incorrect',
+            color: '#d9534f',
+            data: []
+        }]
+    });
+
+    return chart
+
 }
 
 nextquestion();
