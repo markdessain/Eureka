@@ -49,7 +49,7 @@ function countdown() {
 	timer--;
 	countdownboard.innerHTML = String(timer);
 	if (timer === 0) {
-		displayResult("Too slow! I said '" + answer + "' in " + lang);
+		displayResult("<b class='red'>Too slow!</b> I said <i>'" + answer + "'</i> in " + lang);
 		setTimeout('nextquestion()', 3000);
 	}
 	else {
@@ -58,8 +58,6 @@ function countdown() {
 }
 
 function nextquestion() {
-	playing.style.display = "block";
-	fade();
 	clearTimeout(timeout);
 	if (question == maxquestions) {
 		gameResults();
@@ -85,82 +83,33 @@ function nextquestion() {
 	guess2.disabled = false;
 	guess3.disabled = false;
 	guess4.disabled = false;
+	errorboard.style.opacity = 0;
 	timeout = setTimeout('countdown()', 1000);
-}
-
-function pointsscored () {
-	return timer;
 }
 
 function checkAnswer() {
 	clearTimeout(timeout);
-	guess1.disabled = true;
-	guess2.disabled = true;
-	guess3.disabled = true;
-	guess4.disabled = true;
 	if (answer == guess) {
 		histogram[lang][0]++;
-		score += pointsscored();
+		score += timer;
 		scoreboard.innerHTML = String(score);
-		displayResult("Correct! That was " + lang);
+		displayResult("<b class='green'>Correct!</b> That was " + lang);
 	}
 	else {
-		histogram[lang][1]++;
-		displayResult("No! I said '" + answer + "' in " + lang);
+		displayResult("<b class='red'>No!</b> I said <i>'" + answer + "'</i> in " + lang);
 	}
 	setTimeout('nextquestion()', 3000);
 }
 
 function displayResult(message){
-	// TODO: disable multiplechoice inputs and highlight correct answer in green
+	guess1.disabled = true;
+	guess2.disabled = true;
+	guess3.disabled = true;
+	guess4.disabled = true;
+	histogram[lang][1]++;
 	errorboard.innerHTML = message;
-	errorboard.style.FadeState = null;
 	errorboard.style.opacity = 1;
-}
-
-function fade(){
-	if (errorboard.FadeState === null
-		|| errorboard.style.opacity == ''
-		|| errorboard.style.opacity == '1') {
-		errorboard.FadeState = 2;
-	}
-	else errorboard.FadeState = -2;
-
-	if(errorboard.FadeState == 1 || errorboard.FadeState == -1)
-	{
-		errorboard.FadeState = errorboard.FadeState == 1 ? -1 : 1;
-		errorboard.FadeTimeLeft = TimeToFade - errorboard.FadeTimeLeft;
-	}
-	else
-	{
-		errorboard.FadeState = errorboard.FadeState == 2 ? -1 : 1;
-		errorboard.FadeTimeLeft = TimeToFade;
-		setTimeout("animateFade(" + new Date().getTime() + ",'" + "error" + "')", 300);
-	}
-}
-
-function animateFade(lastTick)
-{
-	var curTick = new Date().getTime();
-	var elapsedTicks = curTick - lastTick;
-
-	if(errorboard.FadeTimeLeft <= elapsedTicks)
-	{
-		errorboard.style.opacity = errorboard.FadeState == 1 ? '1' : '0';
-		errorboard.style.filter = 'alpha(opacity = ' + (errorboard.FadeState == 1 ? '100' : '0') + ')';
-		errorboard.FadeState = errorboard.FadeState == 1 ? 2 : -2;
-		return;
-	}
-
-	errorboard.FadeTimeLeft -= elapsedTicks;
-	var newOpVal = errorboard.FadeTimeLeft/TimeToFade;
-	if(errorboard.FadeState == 1)
-		newOpVal = 1 - newOpVal;
-
-	errorboard.style.opacity = newOpVal;
-	errorboard.style.filter = 'alpha(opacity = ' + (newOpVal*100) + ')';
-
-	setTimeout("animateFade(" + curTick + ",'" + "error" + "')", 33);
+	// TODO: highlight correct answer in green
 }
 
 function createChart() {
