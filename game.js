@@ -67,7 +67,6 @@ function nextquestion() {
 	lang = qn.language;
 	html4audio.src = qn.mp3;
 	html5audio.src = qn.mp3;
-	console.log(qn.mp3);
 	speak.load();
 	speak.play();
 	guess1.innerHTML = qn.choices[0];
@@ -78,6 +77,10 @@ function nextquestion() {
 	countdownboard.innerHTML = String(timer);
 	gameover.style.display = "none";
 	playing.style.display = "block";
+	guess1.disabled = false;
+	guess2.disabled = false;
+	guess3.disabled = false;
+	guess4.disabled = false;
 	timeout = setTimeout('countdown()', 1000);
 }
 
@@ -87,6 +90,10 @@ function pointsscored () {
 
 function checkAnswer() {
 	clearTimeout(timeout);
+	guess1.disabled = true;
+	guess2.disabled = true;
+	guess3.disabled = true;
+	guess4.disabled = true;
 	histogram[lang][1]++;
 	if (answer == guess) {
 		histogram[lang][0]++;
@@ -108,7 +115,6 @@ function displayResult(message){
 }
 
 function fade(){
-
 	if (errorboard.FadeState === null
 		|| errorboard.style.opacity == ''
 		|| errorboard.style.opacity == '1') {
