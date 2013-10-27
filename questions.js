@@ -2,6 +2,7 @@
 
 var data = {
     "words": {
+        "Good morning": ["Welsh", "Spanish", "Mandarin", "French"],
         "Hello": ["Welsh", "Spanish", "Mandarin", "French"],
         "Goodbye": ["Welsh", "Spanish", "Mandarin", "French"],
         "Here": ["Welsh", "Spanish", "Mandarin", "French"],
@@ -20,6 +21,10 @@ var data = {
         "Cat": ["Welsh", "Spanish", "Mandarin", "French"]
     },
     "short_questions": {
+        "Is this enough?": ["Welsh", "Spanish", "Mandarin", "French"],
+        "Are you lost?": ["Welsh", "Spanish", "Mandarin", "French"],
+        "How are you?": ["Welsh", "Spanish", "Mandarin", "French"],
+        "Are you tired?": ["Welsh", "Spanish", "Mandarin", "French"],
         "Where are you going?": ["Welsh", "Spanish", "Mandarin", "French"],
         "What do you want?": ["Welsh", "Spanish", "Mandarin", "French"],
         "Do you need this?": ["Welsh", "Spanish", "Mandarin", "French"],
@@ -28,6 +33,8 @@ var data = {
         "When are you leaving?": ["Welsh", "Spanish", "Mandarin", "French"]
     },
     "short_statements": {
+        "We open at 10:00.": ["Welsh", "Spanish", "Mandarin", "French"],
+        "I don't speak English.": ["Welsh", "Spanish", "Mandarin", "French"],
 		"It is not here.": ["Welsh", "Spanish", "Mandarin", "French"],
         "The train has left.": ["Welsh", "Spanish", "Mandarin", "French"],
         "Please come with me.": ["Welsh", "Spanish", "Mandarin", "French"],
@@ -37,6 +44,8 @@ var data = {
         "I can't help you": ["Welsh", "Spanish", "Mandarin", "French"]
     },
     "long_statements": {
+        "It is very windy today.": ["Welsh", "Spanish", "Mandarin", "French"],
+        "The shop is closed on Sundays.": ["Welsh", "Spanish", "Mandarin", "French"],
         "You can't go there now.": ["Welsh", "Spanish", "Mandarin", "French"],
         "You must take the train there.": ["Welsh", "Spanish", "Mandarin", "French"],
         "It is very far from here.": ["Welsh", "Spanish", "Mandarin", "French"],
@@ -45,6 +54,7 @@ var data = {
         "I don't know where it is.": ["Welsh", "Spanish", "Mandarin", "French"]
     },
     "long_questions": {
+        "Who ordered the apple juice?": ["Welsh", "Spanish", "Mandarin", "French"],
         "What would you like to drink?": ["Welsh", "Spanish", "Mandarin", "French"],
         "Where do you want to go tomorrow?": ["Welsh", "Spanish", "Mandarin", "French"],
         "Would you like anything else now?": ["Welsh", "Spanish", "Mandarin", "French"],
