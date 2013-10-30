@@ -28,10 +28,10 @@
 				<span id="timer">10</span>
 			</div>
 			<form action="#" id="multiplechoice" onsubmit="game.checkAnswer(); return false;">
-				<button name="guess1" onclick="guess = this.innerHTML;" value="1">?</button>
-				<button name="guess2" onclick="guess = this.innerHTML;" value="2">?</button>
-				<button name="guess3" onclick="guess = this.innerHTML;" value="3">?</button>
-				<button name="guess4" onclick="guess = this.innerHTML;" value="4">?</button>
+				<button name="guess1" onclick="game.guess = this.innerHTML;" value="1">?</button>
+				<button name="guess2" onclick="game.guess = this.innerHTML;" value="2">?</button>
+				<button name="guess3" onclick="game.guess = this.innerHTML;" value="3">?</button>
+				<button name="guess4" onclick="game.guess = this.innerHTML;" value="4">?</button>
 			</form>
 		</div>
 		<div data-role="content" id="gameover" style="display:none">

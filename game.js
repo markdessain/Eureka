@@ -20,7 +20,6 @@ var resultsboard = document.getElementById("results");
 var score = 0;
 var question = 0;
 var qn = {};
-var guess = "";
 var timer = 10;
 var timeout = null;
 var histogram = [];
@@ -28,6 +27,8 @@ histogram["Welsh"] = [0, 0];
 histogram["Spanish"] = [0, 0];
 histogram["Mandarin"] = [0, 0];
 histogram["French"] = [0, 0];
+
+this.guess = "";
 
 this.speechReady = function(audioTag) {
     guess1.disabled = false;
@@ -73,7 +74,7 @@ this.nextQuestion = function() {
 
 this.checkAnswer = function() {
     clearTimeout(timeout);
-    if (qn.answer == guess) {
+    if (qn.answer == this.guess) {
         histogram[qn.language][0]++;
         scoreboard.innerHTML = String(score += timer);
         displayResult("<b class='green'>Correct!</b> That was " + qn.language);
