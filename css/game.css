@@ -1,10 +1,9 @@
 body {
-	font-family:Verdana,Arial,sans-serif;
+	font-family:Calibri,Arial,sans-serif;
 	color:#000;
 	background-color:#caa;
 	text-align:center;
 }
-
 .gameboard {
 	background-color:#eee;
 	overflow:visible;
@@ -13,14 +12,12 @@ body {
 	padding:1px;
 	box-shadow:inset #fff 0 3px 0, inset rgba(0,0,0,0.03) 0 -3px 0;
 }
-
 @media print, screen and (max-width: 480px) {
 	body {
 		margin:0;
 	}
 }
-
-@media print, screen and (min-width: 595px) {
+@media print, screen and (min-width: 35em) {
 	body {
 		font-size:175%;
 	}
@@ -28,7 +25,6 @@ body {
 		padding:1em;
 	}
 }
-
 @media print, screen and (min-width: 670px) {
 	body {
 		background-image:url('http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files/flags.png');
@@ -50,6 +46,7 @@ body {
 	margin:0.6em;
 	padding:0.4em;
 	color:#fff;
+	font-family:Verdana,Arial,sans-serif;
 	-moz-box-shadow:0 0 10px #303030;
 	-webkit-box-shadow:0 0 10px #303030;
 	-o-box-shadow:0 0 10px #303030;
@@ -63,50 +60,44 @@ body {
 	background-image:-o-linear-gradient(top, #696969 0%,#363636 95%,#313131 97%,#252525 100%);
 	background-image:linear-gradient(top, #696969 0%,#363636 95%,#313131 97%,#252525 100%)
 }
-
 .scoreboard span {
 	display:inline-block;
 }
-
 .spacer {
 	width:10%;
 }
-
 #score {
 	font-weight:bold;
 } 
 
+.midpanel {
+	padding:0.4em;
+	height:2.5em;
+}
 .midpanel span {
 	display:inline-block;
 	vertical-align:top;
-	height:2.5em;
+	xheight:2.5em;
 }
-
 #error {
 	opacity:0;
 	text-align:center;
 	width:80%;
 }
-
 #timer {
 	width:15%;
 	text-align:right;
 	color:#666;
 }
 
-.fb_share_button {
-	color:#fff;
-	border-color:#295582;
-	background:#3b5998;
-	text-decoration:none;
-}
-
 button {
-	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
-	background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+	-moz-box-shadow:inset 0 1px 0 0 #bbdaf7;
+	-webkit-box-shadow:inset 0 1px 0 0 #bbdaf7;
+	box-shadow:inset 0 1px 0 0 #bbdaf7;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5));
+	background:-webkit-linear-gradient(center top, #79bbff 5%, #378de5 100%);
+	background:-moz-linear-gradient(center top, #79bbff 5%, #378de5 100%);
+	background:-o-linear-gradient(center top, #79bbff 5%, #378de5 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
 	background-color:#79bbff;
 	-moz-border-radius:6px;
@@ -114,11 +105,18 @@ button {
 	border-radius:6px;
 	border:1px solid #84bbf3;
 	color:#ffffff;
-	font-family:arial;
-	font-size:20px;
+	font-family:"Trebuchet MS",Arial,sans-serif;
+	font-size:0.85em;
 	font-weight:bold;
 	min-height:5em;
 	width:45%;
 	text-decoration:none;
-	text-shadow:1px 1px 0px #528ecc;
+	text-shadow:1px 1px 0 #528ecc;
+}
+
+.fb_share_button {
+	color:#fff;
+	border-color:#295582;
+	background:#3b5998;
+	text-decoration:none;
 }
