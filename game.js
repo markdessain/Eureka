@@ -1,28 +1,25 @@
 "use strict";
 
 var scoreboard = document.getElementById("score");
+var questionboard = document.getElementById("question");
+var countdownboard = document.getElementById("timer");
+var errorboard = document.getElementById("error");
 var speak = document.getElementById("speak");
 var html5audio = document.getElementById("html5");
 var html4audio = document.getElementById("html4");
-var countdownboard = document.getElementById("timer");
 var multiplechoice = document.forms["multiplechoice"];
 var guess1 = multiplechoice.elements["guess1"];
 var guess2 = multiplechoice.elements["guess2"];
 var guess3 = multiplechoice.elements["guess3"];
 var guess4 = multiplechoice.elements["guess4"];
-var errorboard = document.getElementById("error");
-var questionboard = document.getElementById("question");
-var resultsboard = document.getElementById("results");
-var gameover = document.getElementById("gameover");
 var playing = document.getElementById("playing");
-var chart = createChart();
+var gameover = document.getElementById("gameover");
+var resultsboard = document.getElementById("results");
 
 var score = 0;
 var question = 0;
-var answer = "";
-var lang = "";
+var qn = {};
 var guess = "";
-var maxquestions = 20;
 var timer = 10;
 var timeout = null;
 var histogram = [];
@@ -38,17 +35,18 @@ function gameResults(){
         correct.push(histogram[bar][0]);
         incorrect.push(histogram[bar][1] - histogram[bar][0]);
     }
+    var chart = createChart();
     chart.series[0].setData(incorrect,false);
     chart.series[1].setData(correct,true);
 
-    timeout = setTimeout('playing.style.display="none"; gameover.style.display="block";', 500);
+    playing.style.display = "none";
+    gameover.style.display = "block";
 }
 
 function countdown() {
-    timer--;
-    countdownboard.innerHTML = String(timer);
+    countdownboard.innerHTML = String(--timer);
     if (timer === 0) {
-        displayResult("<b class='red'>Too slow!</b> I said <i>'" + answer + "'</i> in " + lang);
+        displayResult("<b class='red'>Too slow!</b> I said <i>&lsquo;" + qn.answer + "&rsquo;</i> in " + lang);
         setTimeout('nextquestion()', 3000);
     }
     else {
@@ -62,10 +60,8 @@ function nextquestion() {
         gameResults();
         return;
     }
-    questionboard.innerHTML = String(++question);
-    var qn = newQuestion(data);
-    answer = qn.answer;
-    lang = qn.language;
+    questionboard.innerHTML = String(++question) + '/' + maxquestions;
+    qn = newQuestion(data);
     html4audio.src = qn.mp3;
     html5audio.src = qn.mp3;
     speak.load();
@@ -88,14 +84,13 @@ function nextquestion() {
 
 function checkAnswer() {
     clearTimeout(timeout);
-    if (answer == guess) {
-        histogram[lang][0]++;
-        score += timer;
-        scoreboard.innerHTML = String(score);
-        displayResult("<b class='green'>Correct!</b> That was " + lang);
+    if (qn.answer == guess) {
+        histogram[qn.language][0]++;
+        scoreboard.innerHTML = String(score += timer);
+        displayResult("<b class='green'>Correct!</b> That was " + qn.language);
     }
     else {
-        displayResult("<b class='red'>No!</b> I said <i>'" + answer + "'</i> in " + lang);
+        displayResult("<b class='red'>No!</b> I said <i>&lsquo;" + qn.answer + "&rsquo;</i> in " + qn.language);
     }
     setTimeout('nextquestion()', 3000);
 }
@@ -105,7 +100,7 @@ function displayResult(message){
     guess2.disabled = true;
     guess3.disabled = true;
     guess4.disabled = true;
-    histogram[lang][1]++;
+    histogram[qn.language][1]++;
     errorboard.innerHTML = message;
     errorboard.style.opacity = 1;
     // TODO: highlight correct answer in green

@@ -114,6 +114,11 @@ button {
 	text-shadow:1px 1px 0 #528ecc;
 }
 
+#results {
+	width:100%;
+	height:10em;
+}
+
 .fb_share_button {
 	color:#fff;
 	border-color:#295582;

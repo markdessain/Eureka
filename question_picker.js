@@ -1,7 +1,5 @@
 "use strict";
 
-var baseDirectory = 'http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files';
-
 var answered = [];  // Array of (phrases + language) that have already been asked
 
 function pickRandomProperty(obj) {
