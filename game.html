@@ -19,7 +19,7 @@
 		</header>
 
 		<div data-role="content" id="playing" style="display:none">
-			<audio id="speak" preload="auto" oncanplaythrough="this.play();" autoplay controls>
+			<audio id="speak" preload="auto" oncanplaythrough="game.speechReady(this);" autoplay controls>
 				<source id="html5" src="" type="audio/mpeg">
 				<embed id="html4" src="" height=45 width=200 autostart=true>
 			</audio>

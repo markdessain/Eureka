@@ -29,6 +29,17 @@ histogram["Spanish"] = [0, 0];
 histogram["Mandarin"] = [0, 0];
 histogram["French"] = [0, 0];
 
+this.speechReady = function(audioTag) {
+    guess1.disabled = false;
+    guess2.disabled = false;
+    guess3.disabled = false;
+    guess4.disabled = false;
+    timer = 10;
+    countdownboard.innerHTML = String(timer);
+    audioTag.play();
+    timeout = setTimeout('game.countdown()', 1000);
+}
+
 this.countdown = function() {
     countdownboard.innerHTML = String(--timer);
     if (timer === 0) {
@@ -51,21 +62,13 @@ this.nextQuestion = function() {
     html4audio.src = qn.mp3;
     html5audio.src = qn.mp3;
     speak.load();
-    speak.play();
     guess1.innerHTML = qn.choices[0];
     guess2.innerHTML = qn.choices[1];
     guess3.innerHTML = qn.choices[2];
     guess4.innerHTML = qn.choices[3];
-    timer = 10;
-    countdownboard.innerHTML = String(timer);
     gameover.style.display = "none";
     playing.style.display = "block";
-    guess1.disabled = false;
-    guess2.disabled = false;
-    guess3.disabled = false;
-    guess4.disabled = false;
     errorboard.style.opacity = 0;
-    timeout = setTimeout('game.countdown()', 1000);
 };
 
 this.checkAnswer = function() {
