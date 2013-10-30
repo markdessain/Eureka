@@ -1,3 +1,4 @@
+var gameController = function(data, baseDirectory, maxquestions) {
 "use strict";
 
 var scoreboard = document.getElementById("score");
@@ -28,33 +29,18 @@ histogram["Spanish"] = [0, 0];
 histogram["Mandarin"] = [0, 0];
 histogram["French"] = [0, 0];
 
-function gameResults(){
-    var correct = [];
-    var incorrect = [];
-    for (var bar in histogram) {
-        correct.push(histogram[bar][0]);
-        incorrect.push(histogram[bar][1] - histogram[bar][0]);
-    }
-    var chart = createChart();
-    chart.series[0].setData(incorrect,false);
-    chart.series[1].setData(correct,true);
-
-    playing.style.display = "none";
-    gameover.style.display = "block";
-}
-
-function countdown() {
+this.countdown = function() {
     countdownboard.innerHTML = String(--timer);
     if (timer === 0) {
-        displayResult("<b class='red'>Too slow!</b> I said <i>&lsquo;" + qn.answer + "&rsquo;</i> in " + lang);
-        setTimeout('nextquestion()', 3000);
+        displayResult("<b class='red'>Too slow!</b> I said <i>&lsquo;" + qn.answer + "&rsquo;</i> in " + qn.language);
+        setTimeout('game.nextQuestion()', 3000);
     }
     else {
-        timeout = setTimeout('countdown()', 1000);
+        timeout = setTimeout('game.countdown()', 1000);
     }
-}
+};
 
-function nextquestion() {
+this.nextQuestion = function() {
     clearTimeout(timeout);
     if (question == maxquestions) {
         gameResults();
@@ -79,10 +65,10 @@ function nextquestion() {
     guess3.disabled = false;
     guess4.disabled = false;
     errorboard.style.opacity = 0;
-    timeout = setTimeout('countdown()', 1000);
-}
+    timeout = setTimeout('game.countdown()', 1000);
+};
 
-function checkAnswer() {
+this.checkAnswer = function() {
     clearTimeout(timeout);
     if (qn.answer == guess) {
         histogram[qn.language][0]++;
@@ -92,7 +78,22 @@ function checkAnswer() {
     else {
         displayResult("<b class='red'>No!</b> I said <i>&lsquo;" + qn.answer + "&rsquo;</i> in " + qn.language);
     }
-    setTimeout('nextquestion()', 3000);
+    setTimeout('game.nextQuestion()', 3000);
+};
+
+function gameResults(){
+    var correct = [];
+    var incorrect = [];
+    for (var bar in histogram) {
+        correct.push(histogram[bar][0]);
+        incorrect.push(histogram[bar][1] - histogram[bar][0]);
+    }
+    var chart = createChart();
+    chart.series[0].setData(incorrect,false);
+    chart.series[1].setData(correct,true);
+
+    playing.style.display = "none";
+    gameover.style.display = "block";
 }
 
 function displayResult(message){
@@ -148,4 +149,7 @@ function createChart() {
     return chart;
 }
 
-nextquestion();
+};
+
+var game = new gameController(data, baseDirectory, maxquestions);
+game.nextQuestion();
