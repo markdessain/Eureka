@@ -1,23 +1,20 @@
 body {
-	font-family:Calibri,Arial,sans-serif;
+	font-family:Calibri,sans-serif;
 	color:#000;
-	background-color:#caa;
+	background-color:#bbb;
 	text-align:center;
 }
 .gameboard {
 	background-color:#eee;
-	overflow:visible;
 	border-radius:1em;
-	border:1px solid #ddd;
-	padding:1px;
-	box-shadow:inset #fff 0 3px 0, inset rgba(0,0,0,0.03) 0 -3px 0;
+	padding:0.2em;
 }
 @media print, screen and (max-width: 480px) {
 	body {
 		margin:0;
 	}
 }
-@media print, screen and (min-width: 35em) {
+@media print, screen and (min-width: 36em) {
 	body {
 		font-size:175%;
 	}
@@ -32,6 +29,10 @@ body {
 	.gameboard {
 		width:595px;
 		margin:0 auto;
+		-webkit-box-shadow:0 0 4em #36c;
+		-moz-box-shadow:0 0 4em #36c;
+		-o-box-shadow:0 0 4em #336c;
+		box-shadow:0 0 4em #36c;
 	}
 }
 
@@ -46,14 +47,10 @@ body {
 	margin:0.6em;
 	padding:0.4em;
 	color:#fff;
-	font-family:Verdana,Arial,sans-serif;
-	-moz-box-shadow:0 0 10px #303030;
-	-webkit-box-shadow:0 0 10px #303030;
-	-o-box-shadow:0 0 10px #303030;
-	box-shadow:0 0 10px #303030;
-	filter:progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF696969', endColorstr='#FF252525');
-	background:#252525;
+	font-family:Verdana,sans-serif;
 	border-radius:15px;
+	background:#252525;
+	filter:progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF696969', endColorstr='#FF252525');
 	background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #696969), color-stop(95%, #363636), color-stop(97%, #313131), color-stop(100%, #252525));
 	background-image:-webkit-linear-gradient(top, #696969 0%,#363636 95%,#313131 97%,#252525 100%);
 	background-image:-moz-linear-gradient(top, #696969 0%,#363636 95%,#313131 97%,#252525 100%);
@@ -77,7 +74,6 @@ body {
 .midpanel span {
 	display:inline-block;
 	vertical-align:top;
-	xheight:2.5em;
 }
 #error {
 	opacity:0;
@@ -105,7 +101,7 @@ button {
 	border-radius:6px;
 	border:1px solid #84bbf3;
 	color:#ffffff;
-	font-family:"Trebuchet MS",Arial,sans-serif;
+	font-family:"Trebuchet MS",sans-serif;
 	font-size:0.85em;
 	font-weight:bold;
 	min-height:5em;
@@ -115,8 +111,9 @@ button {
 }
 
 #results {
+	margin:0.6em;
 	width:100%;
-	height:10em;
+	height:11em;
 }
 
 .fb_share_button {
