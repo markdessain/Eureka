@@ -4,7 +4,7 @@ body {
 	background-color:#bbb;
 	text-align:center;
 }
-.gameboard {
+.game {
 	background-color:#eee;
 	border-radius:1em;
 	padding:0.2em;
@@ -18,7 +18,7 @@ body {
 	body {
 		font-size:175%;
 	}
-	.gameboard {
+	.game {
 		padding:1em;
 	}
 }
@@ -26,7 +26,7 @@ body {
 	body {
 		background-image:url('http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files/flags.png');
 	}
-	.gameboard {
+	.game {
 		width:595px;
 		margin:0 auto;
 		-webkit-box-shadow:0 0 4em #36c;
@@ -34,6 +34,14 @@ body {
 		-o-box-shadow:0 0 4em #336c;
 		box-shadow:0 0 4em #36c;
 	}
+}
+
+.playing, .gameover {
+	display:none;
+}
+.play .playing,
+.over .gameover {
+	display:block;
 }
 
 .green {
@@ -111,7 +119,7 @@ button {
 }
 
 #results {
-	height:11em;
+	height:9em;
 }
 
 .fb_share_button {

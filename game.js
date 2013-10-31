@@ -1,7 +1,8 @@
 var gameController = function(data, baseDirectory, maxquestions) {
 "use strict";
 
-var scoreboard = document.getElementById("score"),
+var gameboard = document.getElementById("gameboard"),
+	scoreboard = document.getElementById("score"),
 	questionboard = document.getElementById("question"),
 	countdownboard = document.getElementById("timer"),
 	errorboard = document.getElementById("error"),
@@ -9,8 +10,6 @@ var scoreboard = document.getElementById("score"),
 	html5audio = document.getElementById("html5"),
 	html4audio = document.getElementById("html4"),
 	multiplechoice = document.forms["multiplechoice"],
-	playing = document.getElementById("playing"),
-	gameover = document.getElementById("gameover"),
 	resultsboard = document.getElementById("results");
 
 var score = 0,
@@ -63,8 +62,7 @@ this.nextQuestion = function() {
 	}
 	histogram[qn.language][1]++;
 	questionboard.innerHTML = String(++question) + '/' + maxquestions;
-	gameover.style.display = "none";
-	playing.style.display = "block";
+	gameboard.className = "game play";
 	errorboard.style.opacity = 0;
 };
 
@@ -96,14 +94,12 @@ function gameResults(){
 		correct = [],
 		incorrect = [];
 	for (var bar in histogram) {
-		console.log(bar);
 		languages.push(bar);
 		correct.push(histogram[bar][0]);
 		incorrect.push(histogram[bar][1] - histogram[bar][0]);
 	}
 	drawChart(languages, correct, incorrect);
-	playing.style.display = "none";
-	gameover.style.display = "block";
+	gameboard.className = "game over";
 }
 
 function drawChart(categs, lowerSeries, upperSeries) {
