@@ -79,6 +79,11 @@ this.checkAnswer = function() {
 	setTimeout('game.nextQuestion()', 3000);
 };
 
+this.playOn = function() {
+	maxquestions += 10;
+	this.nextQuestion();
+}
+
 function displayResult(message){
 	var i = multiplechoice.elements.length;
 	while (i--) {

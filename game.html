@@ -36,13 +36,14 @@
 		</div>
 		<div data-role="content" class="gameover">
 			<h3 id="results">Game over</h3>
-			<a href="index.html"><button id="playagain">Play again</button></a>
 			<script>function fbs_click() {u="http://bit.ly/eurekalanguages";t="Take the Eureka Languages Challenge yourself!";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script>
 			<p>
 				<a rel="nofollow" href="http://www.facebook.com/share.php?u=http%3A%2F%2Fbit.ly%2Feurekalanguages" class="fb_share_button" onclick="return fbs_click()" target="_blank">
 					&nbsp;Share on <b>facebook</b>
 				<img src="http://www.usphs.gov/images/home/facebook-logo.png" width="40px" /></a>
 			</p>
+			<button onclick="game.playOn()" class="green">Continue playing</button>
+			<button onclick="window.location.href='index.html'" class="red">New game</button>
 		</div>
 	</div>
 	<script lang="text/javascript" src="questions.js"></script>

@@ -45,14 +45,14 @@ body {
 }
 
 .green {
-	color:#060;
+	color:#050;
 }
 .red {
 	color:#600;
 }
 
 .scoreboard {
-	margin:0.6em;
+	margin:0.4em;
 	padding:0.4em;
 	color:#fff;
 	font-family:Verdana,sans-serif;
