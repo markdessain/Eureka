@@ -3,54 +3,55 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<meta charset="UTF-8">
+	<title>Eureka Languages Challenge</title>
 	<link rel="stylesheet" type="text/css" href="css/game.css">
-	<script lang="text/javascript" src="jquery/jquery.js"></script>
 </head>
 <body>
-	<div data-role="page" class="gameboard">
+	<div data-role="page" id="gameboard" class="game">
 		<header>
 			<div class="scoreboard">
-				<span> Score: </span> 
+				<span>Score: </span> 
 				<span id="score">0</span>
 				<span class="spacer"> </span>
 				<span> Qn </span> 
-				<span id="question"> 1</span><span>/20 </span>
+				<span id="question">1/20</span>
 			</div>
 		</header>
 
-		<div data-role="content" id="playing" style="display:none">
-			<audio id="phrase" preload="auto" oncanplaythrough="this.play();" controls>
+		<div data-role="content" class="playing">
+			<audio id="speak" preload="auto" oncanplaythrough="game.speechReady(this);" autoplay controls>
 				<source id="html5" src="" type="audio/mpeg">
 				<embed id="html4" src="" height=45 width=200 autostart=true>
 			</audio>
-			<div id="middlepanel" align="right">
-				<span id="error"> 
-					
-				</span>
-				<span id="timer">
-					10
-				</span>
+			<div class="midpanel" align="right">
+				<span id="error"></span>
+				<span id="timer">10</span>
 			</div>
-			<form action="#" id="multiplechoice" onsubmit="checkAnswer(); return false;">
-				<button name="guess1" onclick="guess = this.innerHTML;" value="1">?</button>
-				<button name="guess2" onclick="guess = this.innerHTML;" value="2">?</button>
-				<button name="guess3" onclick="guess = this.innerHTML;" value="3">?</button>
-				<button name="guess4" onclick="guess = this.innerHTML;" value="4">?</button>
+			<form action="#" id="multiplechoice" onsubmit="game.checkAnswer(); return false;">
+				<button name="guess1" onclick="game.guess = this.innerHTML;" value="1">?</button>
+				<button name="guess2" onclick="game.guess = this.innerHTML;" value="2">?</button>
+				<button name="guess3" onclick="game.guess = this.innerHTML;" value="3">?</button>
+				<button name="guess4" onclick="game.guess = this.innerHTML;" value="4">?</button>
 			</form>
 		</div>
-		<div data-role="content" id="gameover" style="display:none">
-			<h3 id="finishedsentence">Game over</h3>
-			<p><button id="playagain" onclick="playAgain();">Play again</button></p>
-			<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script>
-			<div id="sharefacebook">
-				<a rel="nofollow" href="http://www.facebook.com/share.php?u=<;url>" class="fb_share_button" onclick="return fbs_click()" target="_blank" xstyle="text-decoration:none;">
-					Share with facebook
-				<img src="http://www.usphs.gov/images/home/facebook-logo.png" width="40px"/></a>
-			</div>
+		<div data-role="content" class="gameover">
+			<h3 id="results">Game over</h3>
+			<script>function fbs_click() {u="http://bit.ly/eurekalanguages";t="Take the Eureka Languages Challenge yourself!";window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script>
+			<p>
+				<a rel="nofollow" href="http://www.facebook.com/share.php?u=http%3A%2F%2Fbit.ly%2Feurekalanguages" class="fb_share_button" onclick="return fbs_click()" target="_blank">
+					&nbsp;Share on <b>facebook</b>
+				<img src="http://www.usphs.gov/images/home/facebook-logo.png" width="40px" /></a>
+			</p>
+			<button onclick="game.playOn()" class="green">Continue playing</button>
+			<button onclick="window.location.href='index.html'" class="red">New game</button>
 		</div>
 	</div>
 	<script lang="text/javascript" src="questions.js"></script>
 	<script type="text/javascript" src="question_picker.js"></script>
+
+	<script type="text/javascript" src="jquery/jquery.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+
 	<script type="text/javascript" src="game.js"></script>
 </body>
 </html>

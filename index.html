@@ -1,28 +1,34 @@
 <!DOCTYPE HTML>
 <html>
-<head>
+<head prefix="og: http://ogp.me/ns#">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<meta charset="UTF-8">
+	<title>Eureka Languages Challenge</title>
+	<meta property="og:url" content="http://bit.ly/eurekalanguages" />
+	<meta property="og:image" content="http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files/flags.png" />
+	<meta property="og:description" content="Discover how much you understand of foreign languages" />
+	<meta property="og:title" content="Eureka Languages Challenge" />
 	<link rel="stylesheet" type="text/css" href="css/game.css">
 </head>
 <body>
-	<div data-role="page" class="gameboard">
+	<div data-role="page" class="game">
 		<header>
 			<div class="scoreboard">
-				Eureka Langauges Challenge Game
+				Eureka Languages Challenge
 			</div>
 		</header>
 		<p>
 			You'll hear a foreign word or phrase:
 			Click on the phrase that you think is being said.
-			The quicker you identify the phrase the more points you score.
+			The quicker you identify the phrase the more points you score but you ony get one shot.
+			<br />
 			There are 20 phrases per game, at the end we'll show you how much
 			you understood of each of the languages that you heard.
 		</p>
-		<p>
-			Are you ready?
+		<p class="green">
+			The harder you listen, the more you'll understand. Are you ready?
 		</p>
-		<button class="start" onclick="window.location.href='game.html?#'">Start challenge</button>
+		<button onclick="window.location.href='game.html'">Start challenge</button>
 	</div>
 </body>
 </html>

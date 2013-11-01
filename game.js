@@ -1,159 +1,152 @@
-var questionsURL = "http://spreadsheets.google.com/feeds/list/0AmGNdVG13yM4dFlhcjFYRUN2c1lUdHpBU1ozazliWGc/od6/public/values?alt=json";
-var audiodirectory = "http://dl.dropboxusercontent.com/u/26353384/Language%20sound%20files/";
+var gameController = function(data, baseDirectory, maxquestions) {
+"use strict";
 
+var gameboard = document.getElementById("gameboard"),
+	scoreboard = document.getElementById("score"),
+	questionboard = document.getElementById("question"),
+	countdownboard = document.getElementById("timer"),
+	errorboard = document.getElementById("error"),
+	speak = document.getElementById("speak"),
+	html5audio = document.getElementById("html5"),
+	html4audio = document.getElementById("html4"),
+	multiplechoice = document.forms["multiplechoice"],
+	resultsboard = document.getElementById("results");
 
-var scoreboard = document.getElementById("score");
-var phrase = document.getElementById("phrase");
-var html5audio = document.getElementById("html5");
-var html4audio = document.getElementById("html4");
-var countdownboard = document.getElementById("timer");
-var multiplechoice = document.forms["multiplechoice"];
-var guess1 = multiplechoice.elements["guess1"];
-var guess2 = multiplechoice.elements["guess2"];
-var guess3 = multiplechoice.elements["guess3"];
-var guess4 = multiplechoice.elements["guess4"];
-var errorboard = document.getElementById("error");
-var questionboard = document.getElementById("question");
-var TimeToFade = 1000.0;
-var gameover = document.getElementById("gameover");
-var playing = document.getElementById("playing");
+var score = 0,
+	question = 0,
+	qn = {},
+	timer = 10,
+	timeout = null,
+	histogram = [];
 
-var score = 0;
-var question = 0;
-var answer = "";
-var lang = "";
-var guess = "";
-var maxquestions = 2;
-var timer = 10;
-var timeout = null;
-/*
-function playAgain() {
-	lastword = aDict[Math.floor(Math.random() * aDict.length)];
-	question = 1;
-	score = 0;
-	sentence = [];
-	comboboard.innerHTML = 0;
-	scoreboard.innerHTML = 0;
-	nextquestion();
-}
-*/
-function gameResults(){
-	console.log("game over at qn " + question);
-	// set up results page...
-	timeout = setTimeout('playing.style.display="none"; gameover.style.display="block";', 500);
-}
+this.guess = "";
 
-function countdown() {
-	timer--;
+this.speechReady = function(audioTag) {
+	var i = multiplechoice.elements.length;
+	while (i--) {
+		multiplechoice.elements[i].disabled = false;
+	}
+	timer = 10;
 	countdownboard.innerHTML = String(timer);
+	audioTag.play();
+	timeout = setTimeout('game.countdown()', 1000);
+};
+
+this.countdown = function() {
+	countdownboard.innerHTML = String(--timer);
 	if (timer === 0) {
-		displayResult("Too slow! I said '" + answer + "' in " + lang);
-		setTimeout('nextquestion()', 3000);
+		displayResult("<b class='red'>Too slow!</b> I said <i>&lsquo;" + qn.answer + "&rsquo;</i> in " + qn.language);
+		setTimeout('game.nextQuestion()', 3000);
 	}
 	else {
-		timeout = setTimeout('countdown()', 1000);
+		timeout = setTimeout('game.countdown()', 1000);
 	}
-}
+};
 
-function nextquestion() {
-	playing.style.display = "block";
-	fade();
+this.nextQuestion = function() {
 	clearTimeout(timeout);
 	if (question == maxquestions) {
 		gameResults();
 		return;
 	}
-	questionboard.innerHTML = String(++question);
-	var qn = newQuestion();
-	answer = qn.answer;
-	lang = qn.language;
+	qn = newQuestion(data);
 	html4audio.src = qn.mp3;
 	html5audio.src = qn.mp3;
-	console.log(qn.mp3);
-	phrase.load();
-	phrase.play();
-	guess1.innerHTML = qn.choices[0];
-	guess2.innerHTML = qn.choices[1];
-	guess3.innerHTML = qn.choices[2];
-	guess4.innerHTML = qn.choices[3];
-	timer = 10;
-	countdownboard.innerHTML = String(timer);
-	gameover.style.display = "none";
-	playing.style.display = "block";
-	timeout = setTimeout('countdown()', 1000);
-}
+	speak.load();
+	var i = multiplechoice.elements.length;
+	while (i--) {
+		multiplechoice.elements[i].innerHTML = qn.choices[i];
+	}
+	if (histogram[qn.language] === undefined) {
+		histogram[qn.language] = [0, 0];
+	}
+	histogram[qn.language][1]++;
+	questionboard.innerHTML = String(++question) + '/' + maxquestions;
+	gameboard.className = "game play";
+	errorboard.style.opacity = 0;
+};
 
-function pointsscored () {
-	return timer;
-}
-
-function checkAnswer() {
+this.checkAnswer = function() {
 	clearTimeout(timeout);
-	console.log("does " + guess + " = " + answer);
-
-	if (answer == guess) {
-		score += pointsscored();
-		scoreboard.innerHTML = String(score);
-		displayResult("Correct! That was " + lang);
+	if (qn.answer == this.guess) {
+		histogram[qn.language][0]++;
+		scoreboard.innerHTML = String(score += timer);
+		displayResult("<b class='green'>Correct!</b> That was " + qn.language);
 	}
 	else {
-		displayResult("No! I said '" + answer + "' in " + lang);
+		displayResult("<b class='red'>No!</b> I said <i>&lsquo;" + qn.answer + "&rsquo;</i> in " + qn.language);
 	}
-	setTimeout('nextquestion()', 3000);
+	setTimeout('game.nextQuestion()', 3000);
+};
+
+this.playOn = function() {
+	maxquestions += 10;
+	this.nextQuestion();
 }
 
 function displayResult(message){
+	var i = multiplechoice.elements.length;
+	while (i--) {
+		multiplechoice.elements[i].disabled = true;
+	}
 	errorboard.innerHTML = message;
-	errorboard.style.FadeState = null;
 	errorboard.style.opacity = 1;
-//	setTimeout(fade(), 5000);
+	// TODO: highlight correct answer in green
 }
 
-function fade(){
-
-	if (errorboard.FadeState == null
-		|| errorboard.style.opacity == ''
-		|| errorboard.style.opacity == '1') {
-		errorboard.FadeState = 2;
+function gameResults(){
+	var languages = [],
+		correct = [],
+		incorrect = [];
+	for (var bar in histogram) {
+		languages.push(bar);
+		correct.push(histogram[bar][0]);
+		incorrect.push(histogram[bar][1] - histogram[bar][0]);
 	}
-	else errorboard.FadeState = -2;
-
-	if(errorboard.FadeState == 1 || errorboard.FadeState == -1)
-	{
-		errorboard.FadeState = errorboard.FadeState == 1 ? -1 : 1;
-		errorboard.FadeTimeLeft = TimeToFade - errorboard.FadeTimeLeft;
-	}
-	else
-	{
-		errorboard.FadeState = errorboard.FadeState == 2 ? -1 : 1;
-		errorboard.FadeTimeLeft = TimeToFade;
-		setTimeout("animateFade(" + new Date().getTime() + ",'" + "error" + "')", 300);
-	}  
+	drawChart(languages, correct, incorrect);
+	gameboard.className = "game over";
 }
 
-function animateFade(lastTick)
-{  
-	var curTick = new Date().getTime();
-	var elapsedTicks = curTick - lastTick;
-
-	if(errorboard.FadeTimeLeft <= elapsedTicks)
-	{
-		errorboard.style.opacity = errorboard.FadeState == 1 ? '1' : '0';
-		errorboard.style.filter = 'alpha(opacity = ' 
-		    + (errorboard.FadeState == 1 ? '100' : '0') + ')';
-		errorboard.FadeState = errorboard.FadeState == 1 ? 2 : -2;
-		return;
-	}
-
-	errorboard.FadeTimeLeft -= elapsedTicks;
-	var newOpVal = errorboard.FadeTimeLeft/TimeToFade;
-	if(errorboard.FadeState == 1)
-		newOpVal = 1 - newOpVal;
-
-	errorboard.style.opacity = newOpVal;
-	errorboard.style.filter = 'alpha(opacity = ' + (newOpVal*100) + ')';
-
-	setTimeout("animateFade(" + curTick + ",'" + "error" + "')", 33);
+function drawChart(categs, lowerSeries, upperSeries) {
+	return new Highcharts.Chart({
+		chart: {
+			type: 'column',
+			renderTo: 'results'
+		},
+		title: {
+			text: null,
+		},
+		xAxis: {
+			categories: categs
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: '% correct'
+			},
+			color: '#000'
+		},
+		legend: {
+			enabled: false,
+		},
+		plotOptions: {
+			column: {
+				stacking: 'percent'
+			}
+		},
+		series: [{
+				name: 'Incorrect',
+				color: '#edd',
+				data: upperSeries
+			}, {
+				name: 'Correct',
+				color: '#6b5',
+				data: lowerSeries
+		}]
+	});
 }
 
-nextquestion();
+};
+
+var game = new gameController(data, baseDirectory, maxquestions);
+game.nextQuestion();
