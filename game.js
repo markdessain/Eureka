@@ -114,8 +114,7 @@ function drawChart(categs, lowerSeries, upperSeries) {
 			renderTo: 'results'
 		},
 		title: {
-			text: 'Your scores in each language',
-			color: '#000'
+			text: null,
 		},
 		xAxis: {
 			categories: categs
