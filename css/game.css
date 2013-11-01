@@ -84,9 +84,11 @@ body {
 	vertical-align:top;
 }
 #error {
-	opacity:0;
 	text-align:center;
 	width:80%;
+	opacity:0;
+	-webkit-transition:opacity 0.5s;
+	transition:opacity 0.5s;
 }
 #timer {
 	width:15%;
