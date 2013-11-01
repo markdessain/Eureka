@@ -114,7 +114,7 @@ function drawChart(categs, lowerSeries, upperSeries) {
 			renderTo: 'results'
 		},
 		title: {
-			text: 'Your scores in each of the languages',
+			text: 'Your scores in each language',
 			color: '#000'
 		},
 		xAxis: {
@@ -128,8 +128,7 @@ function drawChart(categs, lowerSeries, upperSeries) {
 			color: '#000'
 		},
 		legend: {
-			backgroundColor: '#fff',
-			reversed: true
+			enabled: false,
 		},
 		plotOptions: {
 			column: {
@@ -138,7 +137,7 @@ function drawChart(categs, lowerSeries, upperSeries) {
 		},
 		series: [{
 				name: 'Incorrect',
-				color: '#c99',
+				color: '#edd',
 				data: upperSeries
 			}, {
 				name: 'Correct',
